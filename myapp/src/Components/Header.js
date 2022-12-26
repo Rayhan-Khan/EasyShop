@@ -11,6 +11,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
 
 export default function Header({ phone, setPhone }) {
+  const [cart, setCart] = useState(10);
   const [toggle, setToggle] = useState(false);
   const [search, setSearch] = useState("");
   async function logout() {
@@ -25,7 +26,7 @@ export default function Header({ phone, setPhone }) {
 
   return (
     <>
-      <div className="hidden  sm:flex items-center justify-between bg-blue-500 text-white p-2 px-20">
+      <div className="hidden sm:flex items-center justify-between bg-blue-500 text-white p-2 px-20">
         <div className="flex">
           <Link className="mr-3 hover:color-red-600" to={"/"}>
             EasyShop
@@ -48,9 +49,11 @@ export default function Header({ phone, setPhone }) {
         </div>
 
         <div className="flex">
-          <button className="flex mr-5">
-            <MdShoppingCart size={18} className="mt-1" />
-            <span>Cart</span>
+          <button className="flex mr-7 relative">
+            <MdShoppingCart size={22} className="mt-1" />
+            {cart>0 && <span className="absolute w-full font-light aspect-square -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
+              {cart}
+            </span>}
           </button>
           {phone ? (
             <div className="flex">
@@ -77,14 +80,16 @@ export default function Header({ phone, setPhone }) {
           )}
         </div>
       </div>
-      <div className="flex sm:hidden justify-between bg-blue-500 text-white p-2">
+      <div className="flex sm:hidden bg-blue-500 text-white p-2">
         <Link to={"/"}>EasyShop</Link>
         <Link to={"/product"} className="mr-auto ml-3">
           AllCategories
         </Link>
-        <button className="flex mr-5">
-          <MdShoppingCart size={18} className="mt-1" />
-          <span>Cart</span>
+        <button className="flex mr-7 relative">
+          <MdShoppingCart size={22} className="mt-1" />
+          {cart>0 && <span className="absolute w-full font-light aspect-square -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
+              {cart}
+            </span>}
         </button>
         <div className="transition" onClick={() => setToggle(!toggle)}>
           {toggle ? (
@@ -108,7 +113,11 @@ export default function Header({ phone, setPhone }) {
             placeholder="Search"
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Link onClick={()=>setToggle(false)} to={`/search/${search}`}  className="bg-green-500 pt-1  px-2">
+          <Link
+            onClick={() => setToggle(false)}
+            to={`/search/${search}`}
+            className="bg-green-500 pt-1  px-2"
+          >
             Search
           </Link>
         </div>
@@ -131,12 +140,15 @@ export default function Header({ phone, setPhone }) {
             <Link
               to="/login"
               className="block p-2 border-b-2 border-white"
-              onClick={()=>setToggle(false)}
+              onClick={() => setToggle(false)}
             >
               Login
             </Link>
-            <Link className="block p-2" to={"/signup"}
-            onClick={()=>setToggle(false)}>
+            <Link
+              className="block p-2"
+              to={"/signup"}
+              onClick={() => setToggle(false)}
+            >
               Signup
             </Link>
           </div>
