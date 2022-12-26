@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 import { baseUrl } from "../utils/baseurl";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Siginup() {
+export default function Siginup({ setPhone }) {
   const [toggle1, setToggle1] = useState(false);
   const [toggle2, setToggle2] = useState(false);
-  const [duplicateError,setDuplicateError]=useState(false);
+  const [duplicateError, setDuplicateError] = useState(false);
+  const navigate = useNavigate();
   const [state, setState] = useState({
     name: "",
     phone: "",
@@ -24,10 +26,10 @@ export default function Siginup() {
     }));
   }
 
- async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setPhoneErr(false);
-    setConfirmPassErr(false)
+    setConfirmPassErr(false);
     setDuplicateError(false);
     const valid = /^(?:\+88|88)?(01[3-9]\d{8})$/.test(state.phone);
     if (!valid || state.password !== state.confirmPassword) {
@@ -35,19 +37,32 @@ export default function Siginup() {
       if (state.password !== state.confirmPassword) setConfirmPassErr(true);
       return;
     }
-        try{
-          const res= await axios.post(`${baseUrl}/signup`,state);
-          if(res.status===201){
-               Cookies.set('name',res.data.data.name,{expires:new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000)});
-               Cookies.set('_id',res.data.data._id,{expires:new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000)});
-               Cookies.set('role',res.data.data.role,{expires:new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000)});
-               Cookies.set('phone',res.data.data.phone,{expires:new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000)});
-          }
-        }catch(error){
-          if(error.response.status===409)
-               setDuplicateError(true);
-        }
+    try {
+      const res = await axios.post(`${baseUrl}/signup`, state);
        
+      if (res?.status === 201) {
+        Cookies.set("name", res.data.data.name, {
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
+        });
+        Cookies.set("_id", res.data.data._id, {
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
+        });
+        Cookies.set("role", res.data.data.role, {
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
+        });
+        Cookies.set("phone", res.data.data.phone, {
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
+        });
+      }
+       setPhone(res.data.data.phone);
+      if (res.data.data.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      } 
+    } catch (error) {
+      if (error?.response?.status === 409) setDuplicateError(true);
+    }
   }
 
   return (
@@ -154,13 +169,13 @@ export default function Siginup() {
               required
             />
             {confirmPassWordErr && (
-            <p className="text-red-500 -mt-3 mb-2">
-              Password Not Match
-            </p>
-          )}
-          {duplicateError && ( <p className="text-red-500 -mt-3 mb-2">
-              Phone Number Already Used
-            </p>)}
+              <p className="text-red-500 -mt-3 mb-2">Password Not Match</p>
+            )}
+            {duplicateError && (
+              <p className="text-red-500 -mt-3 mb-2">
+                Phone Number Already Used
+              </p>
+            )}
           </div>
           <div className="grid grid-cols-1 divide-y">
             <div>
@@ -172,9 +187,12 @@ export default function Siginup() {
               </button>
             </div>
             <div>
-              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-8  w-[70%] mt-2 mb-6">
+              <Link
+                to={"/login"}
+                className="bg-green-500 block text-center hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-auto  w-[70%] mt-2 mb-6"
+              >
                 Login
-              </button>
+              </Link>
             </div>
           </div>
         </form>

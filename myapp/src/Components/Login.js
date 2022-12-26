@@ -3,9 +3,13 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 
 import { MdVisibilityOff, MdVisibility, MdPerson } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+
 import { baseUrl } from "../utils/baseurl";
 
-export default function Login() {
+export default function Login({setPhone}) {
+  const navigate =useNavigate();
+
   const [toggle, setToggle] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [state, setState] = useState({ phone: "", password: "" });
@@ -13,7 +17,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(`${baseUrl}/login`, state);
-      if (res.status === 200) {
+      if (res.status === 200 ) {
         Cookies.set("name", res.data.data.name, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
         });
@@ -26,9 +30,14 @@ export default function Login() {
         Cookies.set("phone", res.data.data.phone, {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 - 5000),
         });
+        setPhone(Cookies.get('phone'))
+      }
+      if(res.data.data.role==='admin'){
+        navigate('/admin')
+      }else{
+        navigate('/')
       }
     } catch (error) {
-      console.log(error);
       if (error.response.status === 401) setLoginError(true);
     }
   }
@@ -46,7 +55,7 @@ export default function Login() {
         <header className="text-center  text-gray-900 text-xl mt-5 font-bold mb-2">
           Login
         </header>
-        <div className="flex text-indigo-600">
+        <div className="flex justify-center text-indigo-600">
           <MdPerson size="10rem" />
         </div>
 
@@ -104,9 +113,9 @@ export default function Login() {
               </button>
             </div>
             <div>
-              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-8  w-[70%] mt-2 mb-6">
+              <Link to={'/signup'} className="bg-green-500 block hover:bg-green-700 text-white text-center font-bold py-2 px-4 rounded m-auto  w-[70%] mt-2 mb-6">
                 Create New Account
-              </button>
+              </Link>
             </div>
           </div>
         </form>
