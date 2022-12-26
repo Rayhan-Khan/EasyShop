@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const product = new mongoose.Schema(
   {
     Categories: {
@@ -8,7 +9,6 @@ const product = new mongoose.Schema(
     Name: {
       type: String,
       required: true,
-      unique: true,
     },
   
     Total: {
@@ -20,7 +20,7 @@ const product = new mongoose.Schema(
       required: true,
     },
     Offer: { type: Number, required: true },
-    RoomPhoto: [{ type: String }],
+    productPhotos: [{ type: String }],
     Details: String,
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
@@ -38,4 +38,4 @@ product.virtual('calculatePrice').get(function(){
 
 
 const Product = mongoose.model("Product", product);
-module.exports = Product;
+export default Product;

@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import path,{dirname} from 'path'
 import { fileURLToPath } from "url";
 import User from './router/user.js'
+import Product from "./router/products.js";
 import cors from 'cors';
 
 
@@ -24,6 +25,7 @@ app.use(cookie());
 
 //route
 app.use('/api',User);
+app.use('/api',Product)
 
 
 //error
