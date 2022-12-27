@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Home() {
+export default function Home({data}) {
+  console.log(data)
   return (
-    <div>Home</div>
+    <div>home</div>
   )
 }
