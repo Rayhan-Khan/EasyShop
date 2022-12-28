@@ -16,8 +16,9 @@ import NotLoggedin from "./utils/Notloggedin";
 
 function App() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState(Cookies.get("phone"));
+
   useEffect(() => {
     (async function () {
       setLoading(true);

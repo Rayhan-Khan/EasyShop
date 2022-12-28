@@ -57,7 +57,7 @@ mongoose.connect(process.env.mongoUrl,(err) => {
 }  */
 
 
-  app.use(express.static(path.join(__dirname, "myapp","build")));
+ /*  app.use(express.static(path.join(__dirname, "myapp","build")));
   app.get("/*", function (_, res) {
     res.sendFile(
       path.join(__dirname, "frontend","build","index.html"),
@@ -67,7 +67,7 @@ mongoose.connect(process.env.mongoUrl,(err) => {
         }
       }
     );
-  });
+  }); */
 
   const PORT = process.env.PORT || 2000;
 app.listen(PORT, () => console.log("running"));
