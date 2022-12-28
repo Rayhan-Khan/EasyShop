@@ -17,8 +17,8 @@ export default function ({data}) {
         </h1>
         <span className="block">
           Price : {data.calculatePrice}Tk <span className="line-through mr-3">{data.Price} </span>
-          Off :{data.Offer}%
         </span>
+        <span> Offer : {data.Offer}%</span>
         <div>
         </div>
        
