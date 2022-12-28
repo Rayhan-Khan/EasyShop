@@ -1,0 +1,5 @@
+.carousel .thumb{
+                  width:5%;
+                  height:60px;
+                  object-fit:contain;
+                }

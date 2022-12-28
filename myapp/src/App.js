@@ -71,7 +71,7 @@ function App() {
                 path="/search/:pattern"
                 element={<Search data={data} />}
               />
-              <Route path="/product/:id" element={<DetailsProduct />} />
+              <Route path="/product/:id" element={<DetailsProduct data={data}/>} />
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>
                 <Route
