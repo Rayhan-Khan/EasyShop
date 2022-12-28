@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { BallTriangle } from "react-loader-spinner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CategoryContainer from "./Components/categoryContainer";
 import {
   DetailsProduct,
   Header,
@@ -56,7 +57,10 @@ function App() {
             >
               <Route index element={<Home data={data} />} />
               <Route path="/products" element={<Product />} />
-              <Route path="/products/:categories" element={<Product />} />
+              <Route
+                path="/categories/:name"
+                element={<CategoryContainer data={data} />}
+              />
               <Route path="/products/:id" element={<DetailsProduct />} />
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>

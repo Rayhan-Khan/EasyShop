@@ -19,8 +19,8 @@ export default function Catgegories({ data }) {
       <h1 className="w-full mt-2 font-bold text-2xl">Categories</h1>
       {Object.entries(categories).map((it) => (
        
-        <div className="relative h-[200px] w-[100%] sm:w-[30%]  color-white" key={it[0]}>
-            <Link >
+        <div className="relative h-[200px] w-[100%] sm:w-[32%]  color-white" key={it[0]}>
+            <Link to={`/categories/${it[0]}`}>
             {<img className="w-full h-full object-object-cover opacity-50 hover:opacity-60" src={generatePublicUrl(it[1])} alt='category'/>}
             <div className="-translate-x-[50%] -translate-y-[50%] absolute top-[50%] left-[50%] bg-white p-2">{it[0]}</div>
             </Link>
