@@ -14,6 +14,8 @@ import {
 } from "./Components";
 import { baseUrl } from "./utils/baseurl";
 import NotLoggedin from "./utils/Notloggedin";
+import Search from "./Components/Search";
+import NotFound from "./Components/NotFound";
 
 function App() {
   const [data, setData] = useState([]);
@@ -61,6 +63,14 @@ function App() {
                 path="/categories/:name"
                 element={<CategoryContainer data={data} />}
               />
+              <Route
+                path="/search/"
+                element={<Product data={data}/>}
+              />
+              <Route
+                path="/search/:pattern"
+                element={<Search data={data} />}
+              />
               <Route path="/product/:id" element={<DetailsProduct />} />
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>
@@ -73,6 +83,7 @@ function App() {
                   element={<Siginup setPhone={setPhone} />}
                 />
               </Route>
+              <Route path="/*" element={<NotFound/>}></Route>
             </Route>
           </Routes>
         </BrowserRouter>

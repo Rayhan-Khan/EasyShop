@@ -43,7 +43,7 @@ export default function Header({ phone, setPhone }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Link to={`/search${search}`} className="bg-green-700 px-2">
+          <Link to={`/search/${search}`} className="bg-green-700 px-2">
             Search
           </Link>
         </div>
