@@ -56,12 +56,12 @@ function App() {
               element={<Header phone={phone} setPhone={setPhone} />}
             >
               <Route index element={<Home data={data} />} />
-              <Route path="/products" element={<Product />} />
+              <Route path="/product" element={<Product data={data}/>} />
               <Route
                 path="/categories/:name"
                 element={<CategoryContainer data={data} />}
               />
-              <Route path="/products/:id" element={<DetailsProduct />} />
+              <Route path="/product/:id" element={<DetailsProduct />} />
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>
                 <Route
