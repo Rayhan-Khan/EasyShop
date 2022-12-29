@@ -85,8 +85,8 @@ export default function Cart({ setCart }) {
           </div>
         </div>
         <div className="text-center">
-        <Link to={'/product'} className="bg-green-700 mr-1 w-[100px] p-2 text-white hover:opacity-90"> Add More Items</Link>
-        <Link className="bg-green-700 w-[100px] p-2 text-white hover:opacity-90">Checkout</Link>
+        <Link to={'/product'} className="bg-green-700 mr-1 w-[100px] p-2 rounded-md text-white hover:opacity-90"> Add More Items</Link>
+        <Link to={'/checkout'} className="bg-green-700 w-[100px] rounded-md p-2 text-white hover:opacity-90">Checkout</Link>
         </div>
         </div>
       )}

@@ -17,9 +17,14 @@ import { baseUrl } from "./utils/baseurl";
 import NotLoggedin from "./utils/Notloggedin";
 import Search from "./Components/Search";
 import NotFound from "./Components/NotFound";
+import Checkout from "./Components/Checkout";
 
 function App() {
   const str = localStorage.getItem('cart');
+  if(!str){
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+       
   const [data, setData] = useState([]);
   const [cart,setCart]=useState(JSON.parse(str));
   const [loading, setLoading] = useState(false);
@@ -76,6 +81,7 @@ function App() {
               />
               <Route path="/product/:id" element={<DetailsProduct setCart={setCart} data={data}/>} />
               <Route path="/cart" element={<Cart setCart={setCart}/>}/>
+              <Route path="/checkout" element={<Checkout setCart={setCart}/>}/>
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>
                 <Route

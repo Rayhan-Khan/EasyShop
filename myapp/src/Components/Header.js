@@ -88,7 +88,7 @@ export default function Header({ phone, setPhone }) {
         </Link>
         <Link to={'/cart'} className="flex mr-7 relative">
           <MdShoppingCart size={22} className="mt-1" />
-          {cart.length>0 && <span className="absolute w-full font-light aspect-square -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
+          {cart.length>0 && <span className="absolute w-full font-light aspect-square text-center -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
               {cart.length}
             </span>}
         </Link>

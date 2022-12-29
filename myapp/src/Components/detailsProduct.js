@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.css"
@@ -7,11 +7,11 @@ import "./style.css"
 
 import { generatePublicUrl } from '../utils/baseurl';
 export default function DetailsProduct({data,setCart}) {
-  
+   const navigate=useNavigate()
   const {id} =useParams();
   const product=data.filter(it=>it._id===id);
   const arr=product[0]?.Details?.split('.');
-  function addCart(id){
+  function addCart(id,buy){
     const str = localStorage.getItem('cart');
     const cart=JSON.parse(str);
     if(id===undefined)
@@ -22,7 +22,10 @@ export default function DetailsProduct({data,setCart}) {
         const jsonArray = JSON.stringify(cart);
         localStorage.setItem('cart', jsonArray);
         setCart(cart);
+        if(buy===1)
+           navigate('/checkout')
         return;
+
       }
     }
     cart.push({
@@ -32,11 +35,12 @@ export default function DetailsProduct({data,setCart}) {
       photo:product[0].productPhotos[0],
       name:product[0].Name
     })
-    console.log(product[0])
 
         const jsonArray = JSON.stringify(cart);
         localStorage.setItem('cart', jsonArray);   
         setCart(cart);
+        if(buy===1)
+        navigate('/checkout')
   }
   return (
     <div>
@@ -62,6 +66,7 @@ export default function DetailsProduct({data,setCart}) {
                   <p className=''>Price : {product[0].calculatePrice}TK</p>
                   <p>Save per product : {product[0].Price-product[0].calculatePrice}TK</p>
                   <button onClick={()=>addCart(product[0]?._id)} className='mt-3 sm:mt-[200px] text-white hover:opacity-90 w-[150px] mb-3 sm:mx-5 bg-[#22c55e] p-2 rounded-lg'>Add To Cart</button>
+                  <button onClick={()=>addCart(product[0]?._id,1)} className='mt-3 sm:mt-[200px] text-white hover:opacity-90 w-[150px] mb-3 sm:mx-5 bg-[#22c55e] p-2 rounded-lg'>BuyNow</button>
               </div>
             </div>
             
