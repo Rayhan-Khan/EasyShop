@@ -9,10 +9,12 @@ import {
 import Cookies from "js-cookie";
 import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
+import Sidebar from "./Sidebar";
 
 export default function Header({ phone, setPhone }) {
   const str = localStorage.getItem('cart');
     const cart=JSON.parse(str);
+    const role= Cookies.get('role')
   const [toggle, setToggle] = useState(false);
   const [search, setSearch] = useState("");
   async function logout() {
@@ -49,13 +51,16 @@ export default function Header({ phone, setPhone }) {
           </Link>
         </div>
 
-        <div className="flex">
-          <Link to={'/cart'} className="flex mr-7 relative">
+       <div className="flex">
+          {role!=='admin' && <Link to={'/cart'} className="flex mr-7 relative">
             <MdShoppingCart size={22} className="mt-1" />
             {cart.length>0 && <span className="absolute w-full font-light aspect-square text-center -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
               {cart.length}
             </span>}
-          </Link>
+          </Link>}
+          {role==='admin' && <Link to={'/admin'} className="flex mr-7">
+         Dashboard
+        </Link>}
           {phone ? (
             <div className="flex">
               <div>
@@ -86,12 +91,15 @@ export default function Header({ phone, setPhone }) {
         <Link to={"/product"} className="mr-auto ml-3">
           AllCategories
         </Link>
-        <Link to={'/cart'} className="flex mr-7 relative">
+        {role!=='admin' && <Link to={'/cart'} className="flex mr-7 relative">
           <MdShoppingCart size={22} className="mt-1" />
           {cart.length>0 && <span className="absolute w-full font-light aspect-square text-center -top-2 left-3.5 rounded-full bg-[#FF6347] text-[FFFAF0]">
               {cart.length}
             </span>}
-        </Link>
+        </Link>}
+        {role==='admin' && <Link to={'/admin'} className="flex mr-7">
+         Dashboard
+        </Link>}
         <div className="transition" onClick={() => setToggle(!toggle)}>
           {toggle ? (
             <MdClear size={20} className="mt-1" />

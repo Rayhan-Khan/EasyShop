@@ -5,6 +5,7 @@ import { BallTriangle } from "react-loader-spinner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryContainer from "./Components/categoryContainer";
 import {
+  Admin,
   Cart,
   DetailsProduct,
   Header,
@@ -18,6 +19,7 @@ import NotLoggedin from "./utils/Notloggedin";
 import Search from "./Components/Search";
 import NotFound from "./Components/NotFound";
 import Checkout from "./Components/Checkout";
+import CreateProduct from "./Components/CreateProduct";
 
 function App() {
   const str = localStorage.getItem('cart');
@@ -82,7 +84,9 @@ function App() {
               <Route path="/product/:id" element={<DetailsProduct setCart={setCart} data={data}/>} />
               <Route path="/cart" element={<Cart setCart={setCart}/>}/>
               <Route path="/checkout" element={<Checkout setCart={setCart}/>}/>
-              <Route path="/admin"></Route>
+              <Route path="/admin" element={<Admin/>}>
+              </Route>
+              <Route path="/admin/createproduct" element={<CreateProduct />}/>
               <Route path="/" element={<NotLoggedin />}>
                 <Route
                   path="/login"
