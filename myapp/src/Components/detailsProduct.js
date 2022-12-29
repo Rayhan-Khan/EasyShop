@@ -6,13 +6,38 @@ import "./style.css"
 
 
 import { generatePublicUrl } from '../utils/baseurl';
-
-export default function DetailsProduct({data}) {
+export default function DetailsProduct({data,setCart}) {
   
   const {id} =useParams();
   const product=data.filter(it=>it._id===id);
   const arr=product[0]?.Details?.split('.');
-  console.log(arr)
+  function addCart(id){
+    const str = localStorage.getItem('cart');
+    const cart=JSON.parse(str);
+    if(id===undefined)
+       return;
+    for(let i=0;i<cart.length;i++){
+      if(cart[i].id===id){
+        cart[i].items+=1;
+        const jsonArray = JSON.stringify(cart);
+        localStorage.setItem('cart', jsonArray);
+        setCart(cart);
+        return;
+      }
+    }
+    cart.push({
+      id,
+      items:1,
+      Price:product[0].calculatePrice,
+      photo:product[0].productPhotos[0],
+      name:product[0].Name
+    })
+    console.log(product[0])
+
+        const jsonArray = JSON.stringify(cart);
+        localStorage.setItem('cart', jsonArray);   
+        setCart(cart);
+  }
   return (
     <div>
       {product.length===0 && <h1 className='text-center'>Not Found</h1>} 
@@ -36,7 +61,7 @@ export default function DetailsProduct({data}) {
                   <p >Offer : {product[0].Offer}%</p>
                   <p className=''>Price : {product[0].calculatePrice}TK</p>
                   <p>Save per product : {product[0].Price-product[0].calculatePrice}TK</p>
-                  <button className='mt-3 sm:mt-[200px] text-white hover:opacity-90 w-[150px] mb-3 sm:mx-5 bg-[#22c55e] p-2 rounded-lg'>Add To Cart</button>
+                  <button onClick={()=>addCart(product[0]?._id)} className='mt-3 sm:mt-[200px] text-white hover:opacity-90 w-[150px] mb-3 sm:mx-5 bg-[#22c55e] p-2 rounded-lg'>Add To Cart</button>
               </div>
             </div>
             

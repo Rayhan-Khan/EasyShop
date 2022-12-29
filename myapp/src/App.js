@@ -5,6 +5,7 @@ import { BallTriangle } from "react-loader-spinner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CategoryContainer from "./Components/categoryContainer";
 import {
+  Cart,
   DetailsProduct,
   Header,
   Home,
@@ -18,7 +19,9 @@ import Search from "./Components/Search";
 import NotFound from "./Components/NotFound";
 
 function App() {
+  const str = localStorage.getItem('cart');
   const [data, setData] = useState([]);
+  const [cart,setCart]=useState(JSON.parse(str));
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState(Cookies.get("phone"));
 
@@ -58,20 +61,21 @@ function App() {
               element={<Header phone={phone} setPhone={setPhone} />}
             >
               <Route index element={<Home data={data} />} />
-              <Route path="/product" element={<Product data={data}/>} />
+              <Route path="/product" element={<Product setCart={setCart} data={data}/>} />
               <Route
                 path="/categories/:name"
-                element={<CategoryContainer data={data} />}
+                element={<CategoryContainer setCart={setCart} data={data} />}
               />
               <Route
                 path="/search/"
-                element={<Product data={data}/>}
+                element={<Product setCart={setCart} data={data}/>}
               />
               <Route
                 path="/search/:pattern"
-                element={<Search data={data} />}
+                element={<Search setCart={setCart} data={data} />}
               />
-              <Route path="/product/:id" element={<DetailsProduct data={data}/>} />
+              <Route path="/product/:id" element={<DetailsProduct setCart={setCart} data={data}/>} />
+              <Route path="/cart" element={<Cart setCart={setCart}/>}/>
               <Route path="/admin"></Route>
               <Route path="/" element={<NotLoggedin />}>
                 <Route
