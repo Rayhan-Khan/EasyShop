@@ -20,6 +20,7 @@ import Search from "./Components/Search";
 import NotFound from "./Components/NotFound";
 import Checkout from "./Components/Checkout";
 import CreateProduct from "./Components/CreateProduct";
+import User from "./Components/User";
 
 function App() {
   const str = localStorage.getItem('cart');
@@ -87,6 +88,7 @@ function App() {
               <Route path="/admin" element={<Admin/>}>
               </Route>
               <Route path="/admin/createproduct" element={<CreateProduct />}/>
+              <Route path="/admin/user" element={<User />}/>
               <Route path="/" element={<NotLoggedin />}>
                 <Route
                   path="/login"
