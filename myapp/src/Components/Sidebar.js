@@ -14,7 +14,7 @@ export default function Sidebar() {
         <Link className='block' to={'/product'}>Products</Link>
         </div>
         <div className='mb-1 p-2 text-center  hover:bg-gray-200'>
-        <Link className='block' to={''}>Order</Link>
+        <Link className='block' to={'/admin/order'}>Order</Link>
         </div>
     </div>
    
