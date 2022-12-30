@@ -88,11 +88,11 @@ function App() {
               <Route path="/product/:id" element={<DetailsProduct setCart={setCart} data={data}/>} />
               <Route path="/cart" element={<Cart setCart={setCart}/>}/>
               <Route path="/checkout" element={<Checkout setCart={setCart}/>}/>
-              <Route path="/admin" element={<Admin/>}>
-              </Route>
-              <Route path="/admin/createproduct" element={<CreateProduct />}/>
-              <Route path="/admin/user" element={<User />}/>
-              <Route path="/admin/order" element={<Order />}/>
+             {role==='admin' && <Route path="/admin" element={<Admin/>}>
+              </Route>}
+             {role==='admin' && <Route path="/admin/createproduct" element={<CreateProduct />}/>}
+             {role ==='admin' && <Route path="/admin/user" element={<User />}/>}
+              {role ==='admin' && <Route path="/admin/order" element={<Order />}/>}
               {role==='admin' && <Route path="admin/adduser" element={<AddUser/>}/>}
               <Route path="/" element={<NotLoggedin />}>
                 <Route

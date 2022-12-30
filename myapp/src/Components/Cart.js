@@ -52,6 +52,7 @@ export default function Cart({ setCart }) {
                   <img
                     className="w-[50px] h-[50px]"
                     src={generatePublicUrl(it.photo)}
+                    alt='image'
                   />
                 </div>
                 <div className="mt-auto mb-auto w-[100px] sm:w-[200px]">
