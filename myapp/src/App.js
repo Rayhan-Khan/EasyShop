@@ -21,6 +21,7 @@ import NotFound from "./Components/NotFound";
 import Checkout from "./Components/Checkout";
 import CreateProduct from "./Components/CreateProduct";
 import User from "./Components/User";
+import AddUser from "./Components/Adduser";
 
 function App() {
   const str = localStorage.getItem('cart');
@@ -32,6 +33,7 @@ function App() {
   const [cart,setCart]=useState(JSON.parse(str));
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState(Cookies.get("phone"));
+  const role= Cookies.get('role');
 
   useEffect(() => {
     (async function () {
@@ -89,6 +91,7 @@ function App() {
               </Route>
               <Route path="/admin/createproduct" element={<CreateProduct />}/>
               <Route path="/admin/user" element={<User />}/>
+              {role==='admin' && <Route path="admin/adduser" element={<AddUser/>}/>}
               <Route path="/" element={<NotLoggedin />}>
                 <Route
                   path="/login"

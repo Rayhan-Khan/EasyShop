@@ -79,3 +79,6 @@ photos:'user5.jpg'
 ]
 
 export default User;
+
+
+

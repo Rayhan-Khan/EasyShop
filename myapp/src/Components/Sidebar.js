@@ -5,16 +5,16 @@ export default function Sidebar() {
   return (
     <div className=''>
         <div className='mb-1 p-2 text-center hover:bg-gray-200'>
-        <Link to={'/admin'}>Dashboard</Link>
+        <Link className='block' to={'/admin'}>Dashboard</Link>
         </div>
         <div className='mb-1 p-2 text-center  hover:bg-gray-200'>
-        <Link to={'/admin/user'}>Users</Link>
+        <Link className='block' to={'/admin/user'}>Users</Link>
         </div>
         <div className='mb-1 p-2 text-center  hover:bg-gray-200'>
-        <Link to={'/product'}>Products</Link>
+        <Link className='block' to={'/product'}>Products</Link>
         </div>
         <div className='mb-1 p-2 text-center  hover:bg-gray-200'>
-        <Link to={''}>Order</Link>
+        <Link className='block' to={''}>Order</Link>
         </div>
     </div>
    
