@@ -109,7 +109,7 @@ export default function Header({ phone, setPhone }) {
         </div>
       </div>
       <div
-        className={`sm:hidden fixed flex-col w-[70%] shadow-lg bg-slate-300 ${
+        className={`sm:hidden z-50 fixed flex-col w-[70%] shadow-lg bg-slate-300 ${
           toggle ? "left-0" : "left-[-71%]"
         } ease-in duration-300`}
       >
